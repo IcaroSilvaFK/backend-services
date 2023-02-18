@@ -3,10 +3,11 @@ import {
   Post,
   Body,
   Get,
-  ParseUUIDPipe,
   Param,
   Delete,
   Put,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common'
 
 import { CompanyServices } from '../services/company_services.service'
@@ -29,20 +30,18 @@ export class CompanyServicesController {
   }
 
   @Get(':id')
-  async findBydId(@Param('id', new ParseUUIDPipe()) id: string) {
+  async findBydId(@Param('id') id: string) {
     return this.companyService.findServiceById(id)
   }
 
   @Put(':id')
-  async update(
-    @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() data: UpdateServiceInput,
-  ) {
+  async update(@Param('id') id: string, @Body() data: UpdateServiceInput) {
     return this.companyService.updateService(id, data)
   }
 
   @Delete(':id')
-  async delete(@Param('id', new ParseUUIDPipe()) id: string) {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete(@Param('id') id: string) {
     return this.companyService.deleteService(id)
   }
 }

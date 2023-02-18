@@ -4,7 +4,6 @@ import {
   IsOptional,
   IsNumber,
   IsPositive,
-  IsDate,
 } from 'class-validator'
 
 export class CreateServiceInput {
@@ -25,7 +24,7 @@ export class CreateServiceInput {
   @IsOptional()
   public comments: string
 
-  @IsDate()
+  @IsString()
   @IsNotEmpty()
-  public time: Date
+  public time: string
 }

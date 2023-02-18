@@ -9,47 +9,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CompanyServices = void 0;
+exports.FinanceService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_provider_1 = require("../../database/providers/prisma.provider");
-let CompanyServices = class CompanyServices {
+let FinanceService = class FinanceService {
     constructor(prismaService) {
         this.prismaService = prismaService;
     }
-    async createNewService(data) {
+    async createFinance(data) {
         try {
-            const amount = data.value * 1000;
-            const convertCreatedToDate = new Date(data.time);
-            return await this.prismaService.services.create({
-                data: Object.assign(Object.assign({}, data), { value: amount, time: convertCreatedToDate }),
+            const amount = data.amount * 1000;
+            return await this.prismaService.transactions.create({
+                data: Object.assign(Object.assign({}, data), { amount }),
             });
         }
         catch (err) {
             console.log(err);
         }
     }
-    async listAllServices() {
+    async listAllTransactions() {
         try {
-            return await this.prismaService.services.findMany();
+            return await this.prismaService.transactions.findMany();
         }
         catch (err) {
             console.log(err);
         }
     }
-    async findServiceById(id) {
+    async listAllTransactionsById(id) {
         try {
-            return await this.prismaService.services.findFirst({
-                where: { id },
+            return await this.prismaService.transactions.findFirst({
+                where: {
+                    id,
+                },
             });
         }
         catch (err) {
             console.log(err);
         }
     }
-    async updateService(id, data) {
+    async updateFinance(id, data) {
         try {
-            return await this.prismaService.services.update({
-                where: { id },
+            return await this.prismaService.transactions.update({
+                where: {
+                    id,
+                },
                 data,
             });
         }
@@ -57,9 +60,9 @@ let CompanyServices = class CompanyServices {
             console.log(err);
         }
     }
-    async deleteService(id) {
+    async deleteFinance(id) {
         try {
-            await this.prismaService.services.delete({
+            return await this.prismaService.transactions.delete({
                 where: {
                     id,
                 },
@@ -70,9 +73,9 @@ let CompanyServices = class CompanyServices {
         }
     }
 };
-CompanyServices = __decorate([
+FinanceService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_provider_1.PrismaProvider])
-], CompanyServices);
-exports.CompanyServices = CompanyServices;
-//# sourceMappingURL=company_services.service.js.map
+], FinanceService);
+exports.FinanceService = FinanceService;
+//# sourceMappingURL=finance.service.js.map

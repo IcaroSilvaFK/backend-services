@@ -3,5 +3,5 @@ export declare class CreateServiceInput {
     description: string;
     value: number;
     comments: string;
-    time: Date;
+    time: string;
 }

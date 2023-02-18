@@ -12,70 +12,69 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CompanyServicesController = void 0;
+exports.FinanceController = void 0;
 const common_1 = require("@nestjs/common");
-const company_services_service_1 = require("../services/company_services.service");
-const create_service_input_dto_1 = require("../dtos/create_service_input.dto");
-const update_service_input_dto_1 = require("../dtos/update_service_input.dto");
-let CompanyServicesController = class CompanyServicesController {
-    constructor(companyService) {
-        this.companyService = companyService;
+const create_finance_input_dto_1 = require("../dtos/create_finance_input.dto");
+const update_finance_input_dto_1 = require("../dtos/update_finance_input.dto");
+const finance_service_1 = require("../services/finance.service");
+let FinanceController = class FinanceController {
+    constructor(financeServices) {
+        this.financeServices = financeServices;
     }
     async create(data) {
-        return await this.companyService.createNewService(data);
+        return this.financeServices.createFinance(data);
     }
-    async listAll() {
-        return this.companyService.listAllServices();
+    async show() {
+        return this.financeServices.listAllTransactions();
     }
-    async findBydId(id) {
-        return this.companyService.findServiceById(id);
+    async showOne(id) {
+        return this.financeServices.listAllTransactionsById(id);
     }
     async update(id, data) {
-        return this.companyService.updateService(id, data);
+        return this.financeServices.updateFinance(id, data);
     }
     async delete(id) {
-        return this.companyService.deleteService(id);
+        return this.financeServices.deleteFinance(id);
     }
 };
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_service_input_dto_1.CreateServiceInput]),
+    __metadata("design:paramtypes", [create_finance_input_dto_1.CreateFinanceInput]),
     __metadata("design:returntype", Promise)
-], CompanyServicesController.prototype, "create", null);
+], FinanceController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], CompanyServicesController.prototype, "listAll", null);
+], FinanceController.prototype, "show", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], CompanyServicesController.prototype, "findBydId", null);
+], FinanceController.prototype, "showOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_service_input_dto_1.UpdateServiceInput]),
+    __metadata("design:paramtypes", [String, update_finance_input_dto_1.UpdateFinance]),
     __metadata("design:returntype", Promise)
-], CompanyServicesController.prototype, "update", null);
+], FinanceController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], CompanyServicesController.prototype, "delete", null);
-CompanyServicesController = __decorate([
-    (0, common_1.Controller)('/services'),
-    __metadata("design:paramtypes", [company_services_service_1.CompanyServices])
-], CompanyServicesController);
-exports.CompanyServicesController = CompanyServicesController;
-//# sourceMappingURL=company_services.controller.js.map
+], FinanceController.prototype, "delete", null);
+FinanceController = __decorate([
+    (0, common_1.Controller)('finances'),
+    __metadata("design:paramtypes", [finance_service_1.FinanceService])
+], FinanceController);
+exports.FinanceController = FinanceController;
+//# sourceMappingURL=finance.controller.js.map

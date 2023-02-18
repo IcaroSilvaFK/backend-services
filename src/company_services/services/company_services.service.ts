@@ -11,7 +11,15 @@ export class CompanyServices {
 
   async createNewService(data: CreateServiceInput) {
     try {
-      return await this.prismaService.services.create({ data })
+      const amount = data.value * 1_000
+      const convertCreatedToDate = new Date(data.time)
+      return await this.prismaService.services.create({
+        data: {
+          ...data,
+          value: amount,
+          time: convertCreatedToDate,
+        },
+      })
     } catch (err) {
       console.log(err)
     }

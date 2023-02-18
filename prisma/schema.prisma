@@ -20,3 +20,19 @@ model Services {
 
   @@map("services")
 }
+
+enum TRANSACTION_TYPE {
+  WITHDRAW
+  DEPOSIT
+}
+
+model Transactions {
+  id        String           @id @default(cuid())
+  title     String
+  type      TRANSACTION_TYPE
+  createdAt DateTime         @default(now()) @map("create_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+  amount    Int
+
+  @@map("transactions")
+}

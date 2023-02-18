@@ -9,35 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateServiceInput = void 0;
+exports.CreateFinanceInput = void 0;
 const class_validator_1 = require("class-validator");
-class CreateServiceInput {
+var TRANSACTION_TYPE;
+(function (TRANSACTION_TYPE) {
+    TRANSACTION_TYPE["WITHDRAW"] = "WITHDRAW";
+    TRANSACTION_TYPE["DEPOSIT"] = "DEPOSIT";
+})(TRANSACTION_TYPE || (TRANSACTION_TYPE = {}));
+class CreateFinanceInput {
 }
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateServiceInput.prototype, "title", void 0);
+], CreateFinanceInput.prototype, "title", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(TRANSACTION_TYPE),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateServiceInput.prototype, "description", void 0);
+], CreateFinanceInput.prototype, "type", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)
-], CreateServiceInput.prototype, "value", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateServiceInput.prototype, "comments", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateServiceInput.prototype, "time", void 0);
-exports.CreateServiceInput = CreateServiceInput;
-//# sourceMappingURL=create_service_input.dto.js.map
+], CreateFinanceInput.prototype, "amount", void 0);
+exports.CreateFinanceInput = CreateFinanceInput;
+//# sourceMappingURL=create_finance_input.dto.js.map

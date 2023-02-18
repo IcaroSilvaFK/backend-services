@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator'
 
 enum TRANSACTION_TYPE {
   WITHDRAW = 'WITHDRAW',
@@ -10,6 +16,10 @@ export class CreateFinanceInput {
   @IsString()
   @IsNotEmpty()
   public title: string
+
+  @IsString()
+  @IsOptional()
+  public description: string
 
   @IsEnum(TRANSACTION_TYPE)
   @IsNotEmpty()

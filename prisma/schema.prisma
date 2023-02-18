@@ -14,8 +14,8 @@ model Services {
   id          String   @id @default(cuid())
   title       String
   description String?
-  value       Int
   comments    String?
+  value       Int
   time        DateTime @default(now())
 
   @@map("services")
@@ -27,12 +27,13 @@ enum TRANSACTION_TYPE {
 }
 
 model Transactions {
-  id        String           @id @default(cuid())
-  title     String
-  type      TRANSACTION_TYPE
-  createdAt DateTime         @default(now()) @map("create_at")
-  updatedAt DateTime         @updatedAt @map("updated_at")
-  amount    Int
+  id          String           @id @default(cuid())
+  title       String
+  description String?
+  type        TRANSACTION_TYPE
+  createdAt   DateTime         @default(now()) @map("create_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  amount      Int
 
   @@map("transactions")
 }

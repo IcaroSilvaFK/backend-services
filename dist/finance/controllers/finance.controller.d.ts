@@ -7,6 +7,7 @@ export declare class FinanceController {
     create(data: CreateFinanceInput): Promise<import(".prisma/client").Transactions>;
     show(): Promise<import(".prisma/client").Transactions[]>;
     showOne(id: string): Promise<import(".prisma/client").Transactions>;
+    showTransactionToDay(): Promise<import(".prisma/client").Transactions[]>;
     update(id: string, data: UpdateFinance): Promise<import(".prisma/client").Transactions>;
     delete(id: string): Promise<import(".prisma/client").Transactions>;
 }

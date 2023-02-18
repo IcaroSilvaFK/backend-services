@@ -7,6 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const port = +process.env.PORT || 8080
 
+  app.useLogger(['log', 'verbose'])
+
   app.setGlobalPrefix('/api/v1')
 
   app.useGlobalPipes(new ValidationPipe())

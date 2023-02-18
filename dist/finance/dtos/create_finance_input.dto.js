@@ -24,6 +24,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateFinanceInput.prototype, "title", void 0);
 __decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], CreateFinanceInput.prototype, "description", void 0);
+__decorate([
     (0, class_validator_1.IsEnum)(TRANSACTION_TYPE),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)

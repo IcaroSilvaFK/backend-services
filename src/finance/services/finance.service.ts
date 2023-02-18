@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import * as dayjs from 'dayjs'
 
 import { CreateFinanceInput } from '../dtos/create_finance_input.dto'
 import { UpdateFinance } from '../dtos/update_finance_input.dto'
@@ -39,6 +40,33 @@ export class FinanceService {
           id,
         },
       })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async listTransactionToDay() {
+    try {
+      const startDay = dayjs().startOf('day').toDate()
+      const endDay = dayjs().endOf('day').toDate()
+      console.log({
+        startDay,
+        endDay,
+      })
+      const listAllTransactionsToDay =
+        await this.prismaService.transactions.findMany({
+          where: {
+            createdAt: {
+              gte: startDay,
+              lte: endDay,
+            },
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        })
+
+      return listAllTransactionsToDay
     } catch (err) {
       console.log(err)
     }

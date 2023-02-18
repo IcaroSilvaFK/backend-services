@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { hash } from 'argon2'
 
 import { PrismaProvider } from '../../database/providers/prisma.provider'
 
@@ -11,8 +12,13 @@ export class CompanyServices {
 
   async createCompany(data: CreateCompanyInput) {
     try {
+      const passHashed = await hash(data.password)
+
       return await this.databaseService.companys.create({
-        data,
+        data: {
+          ...data,
+          password: passHashed,
+        },
       })
     } catch (err) {
       console.log(err)
@@ -32,9 +38,6 @@ export class CompanyServices {
       return await this.databaseService.companys.findFirst({
         where: {
           email: emailOrCnpj,
-          OR: {
-            cnpj: emailOrCnpj,
-          },
         },
       })
     } catch (err) {

@@ -12,6 +12,7 @@ const config_1 = require("@nestjs/config");
 const company_module_1 = require("./company/company.module");
 const services_module_1 = require("./company_services/services.module");
 const finance_module_1 = require("./finance/finance.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -21,6 +22,7 @@ AppModule = __decorate([
             services_module_1.ServicesModule,
             finance_module_1.FinanceModule,
             company_module_1.CompanyModule,
+            auth_module_1.AuthModule,
         ],
     })
 ], AppModule);

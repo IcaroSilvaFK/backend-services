@@ -8,5 +8,6 @@ import { CompanyServices } from './services/company.service'
   controllers: [CompanyController],
   imports: [DatabaseModule],
   providers: [CompanyServices],
+  exports: [CompanyServices],
 })
 export class CompanyModule {}

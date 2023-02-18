@@ -2,8 +2,8 @@ import { PrismaProvider } from '../../database/providers/prisma.provider';
 import { CreateServiceInput } from '../dtos/create_service_input.dto';
 import { UpdateServiceInput } from '../dtos/update_service_input.dto';
 export declare class CompanyServices {
-    private readonly prismaService;
-    constructor(prismaService: PrismaProvider);
+    private readonly databaseService;
+    constructor(databaseService: PrismaProvider);
     createNewService(data: CreateServiceInput): Promise<import(".prisma/client").Services>;
     listAllServices(): Promise<import(".prisma/client").Services[]>;
     findServiceById(id: string): Promise<import(".prisma/client").Services>;

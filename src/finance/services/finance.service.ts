@@ -8,13 +8,13 @@ import { PrismaProvider } from '../../database/providers/prisma.provider'
 
 @Injectable()
 export class FinanceService {
-  constructor(private readonly prismaService: PrismaProvider) {}
+  constructor(private readonly databaseService: PrismaProvider) {}
 
   async createFinance(data: CreateFinanceInput) {
     try {
       const amount = data.amount * 1_000
 
-      return await this.prismaService.transactions.create({
+      return await this.databaseService.transactions.create({
         data: {
           ...data,
           amount,
@@ -27,7 +27,7 @@ export class FinanceService {
 
   async listAllTransactions() {
     try {
-      return await this.prismaService.transactions.findMany()
+      return await this.databaseService.transactions.findMany()
     } catch (err) {
       console.log(err)
     }
@@ -35,7 +35,7 @@ export class FinanceService {
 
   async listAllTransactionsById(id: string) {
     try {
-      return await this.prismaService.transactions.findFirst({
+      return await this.databaseService.transactions.findFirst({
         where: {
           id,
         },
@@ -54,7 +54,7 @@ export class FinanceService {
         endDay,
       })
       const listAllTransactionsToDay =
-        await this.prismaService.transactions.findMany({
+        await this.databaseService.transactions.findMany({
           where: {
             createdAt: {
               gte: startDay,
@@ -74,7 +74,7 @@ export class FinanceService {
 
   async updateFinance(id: string, data: UpdateFinance) {
     try {
-      return await this.prismaService.transactions.update({
+      return await this.databaseService.transactions.update({
         where: {
           id,
         },
@@ -87,7 +87,7 @@ export class FinanceService {
 
   async deleteFinance(id: string) {
     try {
-      return await this.prismaService.transactions.delete({
+      return await this.databaseService.transactions.delete({
         where: {
           id,
         },

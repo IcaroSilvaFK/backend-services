@@ -10,6 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Companys {
+  id       String @id @default(cuid())
+  name     String
+  cnpj     String
+  password String
+  email    String
+
+  @@index([cnpj, email])
+  @@map("companys")
+}
+
 model Services {
   id          String   @id @default(cuid())
   title       String

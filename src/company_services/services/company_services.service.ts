@@ -7,13 +7,13 @@ import { UpdateServiceInput } from '../dtos/update_service_input.dto'
 
 @Injectable()
 export class CompanyServices {
-  constructor(private readonly prismaService: PrismaProvider) {}
+  constructor(private readonly databaseService: PrismaProvider) {}
 
   async createNewService(data: CreateServiceInput) {
     try {
       const amount = data.value * 1_000
       const convertCreatedToDate = new Date(data.time)
-      return await this.prismaService.services.create({
+      return await this.databaseService.services.create({
         data: {
           ...data,
           value: amount,
@@ -27,7 +27,7 @@ export class CompanyServices {
 
   async listAllServices() {
     try {
-      return await this.prismaService.services.findMany()
+      return await this.databaseService.services.findMany()
     } catch (err) {
       console.log(err)
     }
@@ -35,7 +35,7 @@ export class CompanyServices {
 
   async findServiceById(id: string) {
     try {
-      return await this.prismaService.services.findFirst({
+      return await this.databaseService.services.findFirst({
         where: { id },
       })
     } catch (err) {
@@ -45,7 +45,7 @@ export class CompanyServices {
 
   async updateService(id: string, data: UpdateServiceInput) {
     try {
-      return await this.prismaService.services.update({
+      return await this.databaseService.services.update({
         where: { id },
         data,
       })
@@ -56,7 +56,7 @@ export class CompanyServices {
 
   async deleteService(id: string) {
     try {
-      await this.prismaService.services.delete({
+      await this.databaseService.services.delete({
         where: {
           id,
         },

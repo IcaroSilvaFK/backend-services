@@ -13,14 +13,14 @@ exports.CompanyServices = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_provider_1 = require("../../database/providers/prisma.provider");
 let CompanyServices = class CompanyServices {
-    constructor(prismaService) {
-        this.prismaService = prismaService;
+    constructor(databaseService) {
+        this.databaseService = databaseService;
     }
     async createNewService(data) {
         try {
             const amount = data.value * 1000;
             const convertCreatedToDate = new Date(data.time);
-            return await this.prismaService.services.create({
+            return await this.databaseService.services.create({
                 data: Object.assign(Object.assign({}, data), { value: amount, time: convertCreatedToDate }),
             });
         }
@@ -30,7 +30,7 @@ let CompanyServices = class CompanyServices {
     }
     async listAllServices() {
         try {
-            return await this.prismaService.services.findMany();
+            return await this.databaseService.services.findMany();
         }
         catch (err) {
             console.log(err);
@@ -38,7 +38,7 @@ let CompanyServices = class CompanyServices {
     }
     async findServiceById(id) {
         try {
-            return await this.prismaService.services.findFirst({
+            return await this.databaseService.services.findFirst({
                 where: { id },
             });
         }
@@ -48,7 +48,7 @@ let CompanyServices = class CompanyServices {
     }
     async updateService(id, data) {
         try {
-            return await this.prismaService.services.update({
+            return await this.databaseService.services.update({
                 where: { id },
                 data,
             });
@@ -59,7 +59,7 @@ let CompanyServices = class CompanyServices {
     }
     async deleteService(id) {
         try {
-            await this.prismaService.services.delete({
+            await this.databaseService.services.delete({
                 where: {
                     id,
                 },

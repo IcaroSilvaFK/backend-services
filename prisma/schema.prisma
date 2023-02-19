@@ -17,6 +17,7 @@ model Companys {
   password     String
   email        String
   RefreshToken RefreshToken[]
+  Transactions Transactions[]
 
   @@index([cnpj, email])
   @@map("companys")
@@ -58,6 +59,8 @@ model Transactions {
   createdAt   DateTime         @default(now()) @map("create_at")
   updatedAt   DateTime         @updatedAt @map("updated_at")
   amount      Int
+  companyId   String           @map("company_id")
+  company     Companys         @relation(fields: [companyId], references: [id])
 
   @@map("transactions")
 }

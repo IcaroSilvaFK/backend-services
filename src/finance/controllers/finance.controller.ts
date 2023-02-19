@@ -27,10 +27,9 @@ export class FinanceController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get()
-  async show() {
-    console.log('show')
-    return this.financeServices.listAllTransactions()
+  @Get('/all/:companyId')
+  async show(@Param('companyId') id: string) {
+    return this.financeServices.listAllTransactions(id)
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -41,10 +40,9 @@ export class FinanceController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('today/all')
-  async showTransactionToDay() {
-    console.log('showTransactionToDay')
-    return this.financeServices.listTransactionToDay()
+  @Get('today/all/:companyId')
+  async showTransactionToDay(@Param('companyId') id: string) {
+    return this.financeServices.listTransactionToDay(id)
   }
 
   @UseGuards(AuthGuard('jwt'))

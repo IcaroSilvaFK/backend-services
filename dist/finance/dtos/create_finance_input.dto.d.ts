@@ -6,6 +6,7 @@ export declare class CreateFinanceInput {
     title: string;
     description: string;
     type: TRANSACTION_TYPE;
+    companyId: string;
     amount: number;
 }
 export {};

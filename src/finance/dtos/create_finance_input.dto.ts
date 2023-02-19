@@ -25,6 +25,10 @@ export class CreateFinanceInput {
   @IsNotEmpty()
   public type: TRANSACTION_TYPE
 
+  @IsString()
+  @IsNotEmpty()
+  public companyId: string
+
   @IsNumber()
   @IsNotEmpty()
   public amount: number

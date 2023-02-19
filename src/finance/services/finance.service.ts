@@ -25,9 +25,13 @@ export class FinanceService {
     }
   }
 
-  async listAllTransactions() {
+  async listAllTransactions(companyId: string) {
     try {
-      return await this.databaseService.transactions.findMany()
+      return await this.databaseService.transactions.findMany({
+        where: {
+          companyId,
+        },
+      })
     } catch (err) {
       console.log(err)
     }
@@ -45,7 +49,7 @@ export class FinanceService {
     }
   }
 
-  async listTransactionToDay() {
+  async listTransactionToDay(companyId: string) {
     try {
       const startDay = dayjs().startOf('day').toDate()
       const endDay = dayjs().endOf('day').toDate()
@@ -56,9 +60,12 @@ export class FinanceService {
       const listAllTransactionsToDay =
         await this.databaseService.transactions.findMany({
           where: {
-            createdAt: {
-              gte: startDay,
-              lte: endDay,
+            companyId,
+            AND: {
+              createdAt: {
+                gte: startDay,
+                lte: endDay,
+              },
             },
           },
           orderBy: {

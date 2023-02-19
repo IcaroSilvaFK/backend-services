@@ -34,6 +34,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateFinanceInput.prototype, "type", void 0);
 __decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateFinanceInput.prototype, "companyId", void 0);
+__decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)

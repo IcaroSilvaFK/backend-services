@@ -53,10 +53,7 @@ export class FinanceService {
     try {
       const startDay = dayjs().startOf('day').toDate()
       const endDay = dayjs().endOf('day').toDate()
-      console.log({
-        startDay,
-        endDay,
-      })
+
       const listAllTransactionsToDay =
         await this.databaseService.transactions.findMany({
           where: {

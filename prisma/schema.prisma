@@ -18,6 +18,7 @@ model Companys {
   email        String
   RefreshToken RefreshToken[]
   Transactions Transactions[]
+  Product      Product[]
 
   @@index([cnpj, email])
   @@map("companys")
@@ -63,4 +64,16 @@ model Transactions {
   company     Companys         @relation(fields: [companyId], references: [id])
 
   @@map("transactions")
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  title     String
+  quantity  Int
+  amount    Int
+  companyId String   @map("company_id")
+  company   Companys @relation(fields: [companyId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("products")
 }
